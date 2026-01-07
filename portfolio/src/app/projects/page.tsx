@@ -28,13 +28,19 @@ async function getProjects(): Promise<Project[]> {
     }
 
     // First, try to check if the type column exists
-    const columnCheck = await prisma!.$queryRaw<Array<{ column_name: string }>>`
-      SELECT column_name 
-      FROM information_schema.columns 
-      WHERE table_name = 'Project' AND column_name = 'type'
-    `
-    
-    const hasTypeColumn = columnCheck.length > 0
+    let hasTypeColumn = false
+    try {
+      const columnCheck = await prisma!.$queryRaw<Array<{ column_name: string }>>`
+        SELECT column_name 
+        FROM information_schema.columns 
+        WHERE table_name = 'Project' AND column_name = 'type'
+      `
+      hasTypeColumn = columnCheck.length > 0
+    } catch (queryError) {
+      // If query fails, assume column doesn't exist and use fallback
+      console.warn('Could not check for type column, using fallback query:', queryError)
+      hasTypeColumn = false
+    }
     
     if (hasTypeColumn) {
       // Column exists, use normal Prisma query
