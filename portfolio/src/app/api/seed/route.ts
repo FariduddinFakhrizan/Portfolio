@@ -69,36 +69,37 @@ export async function POST(request: Request) {
       },
     ];
 
-    // Insert projects using raw SQL to avoid Prisma schema issues
-    const insertSQL = `
-      INSERT INTO "Project" (title, description, image, link, index, type, "createdAt", "updatedAt")
-      VALUES 
-        ($1, $2, $3, $4, $5, $6, NOW(), NOW()),
-        ($7, $8, $9, $10, $11, $12, NOW(), NOW()),
-        ($13, $14, $15, $16, $17, $18, NOW(), NOW())
-    `;
-    
-    await prisma.$executeRawUnsafe(
-      insertSQL,
-      projectsData[0].title,
-      projectsData[0].description,
-      projectsData[0].image,
-      projectsData[0].link,
-      projectsData[0].index,
-      projectsData[0].type,
-      projectsData[1].title,
-      projectsData[1].description,
-      projectsData[1].image,
-      projectsData[1].link,
-      projectsData[1].index,
-      projectsData[1].type,
-      projectsData[2].title,
-      projectsData[2].description,
-      projectsData[2].image,
-      projectsData[2].link,
-      projectsData[2].index,
-      projectsData[2].type
-    );
+    // Insert projects one by one for better error handling
+    for (const project of projectsData) {
+      try {
+        await prisma.$executeRawUnsafe(
+          `INSERT INTO "Project" (title, description, image, link, index, type, "createdAt", "updatedAt")
+           VALUES ($1, $2, $3, $4, $5, $6, NOW(), NOW())`,
+          project.title,
+          project.description,
+          project.image,
+          project.link,
+          project.index,
+          project.type
+        )
+      } catch (insertError: any) {
+        // Try without type column if it doesn't exist
+        try {
+          await prisma.$executeRawUnsafe(
+            `INSERT INTO "Project" (title, description, image, link, index, "createdAt", "updatedAt")
+             VALUES ($1, $2, $3, $4, $5, NOW(), NOW())`,
+            project.title,
+            project.description,
+            project.image,
+            project.link,
+            project.index
+          )
+        } catch (retryError: any) {
+          console.error(`Failed to insert ${project.title}:`, retryError)
+          throw retryError
+        }
+      }
+    }
 
     // Fetch created projects to return
     const createdProjects = await prisma.$queryRawUnsafe<Array<{id: number, title: string}>>(
