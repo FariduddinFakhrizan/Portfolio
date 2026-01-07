@@ -130,11 +130,19 @@ export default function InitDbPage() {
                 <li>Go to <a href="https://vercel.com/dashboard" target="_blank" rel="noopener noreferrer" className="text-yellow-400 underline">Vercel Dashboard</a></li>
                 <li>Select your project</li>
                 <li>Go to Settings → Environment Variables</li>
-                <li>Add <code className="bg-white/10 px-1 rounded">DATABASE_URL</code> with your Prisma Accelerate URL</li>
-                <li>Set it for Production, Preview, and Development</li>
-                <li>Redeploy or wait for automatic redeploy</li>
-                <li>Come back here and click "Initialize & Seed Database"</li>
+                <li>Add <code className="bg-white/10 px-1 rounded">DATABASE_URL</code> (NOT PRISMA_DATABASE_URL) with your database URL</li>
+                <li><strong className="text-yellow-400">IMPORTANT:</strong> Make sure it's set for <strong>Production</strong> environment (check the dropdown)</li>
+                <li>Save and wait for automatic redeploy (or trigger manually)</li>
+                <li>Refresh this page and try again</li>
               </ol>
+              {details?.debug && (
+                <div className="mt-4 p-3 bg-black/30 rounded text-xs font-mono">
+                  <p className="text-yellow-400 mb-2">Debug Info:</p>
+                  <pre className="text-white/60 overflow-auto">
+                    {JSON.stringify(details.debug, null, 2)}
+                  </pre>
+                </div>
+              )}
             </div>
           )}
 

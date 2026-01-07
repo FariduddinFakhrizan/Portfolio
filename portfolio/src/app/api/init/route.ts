@@ -4,9 +4,23 @@ import { NextResponse } from "next/server"
 // Complete database initialization endpoint - creates schema and seeds data
 export async function POST(request: Request) {
   try {
-    if (!process.env.DATABASE_URL) {
+    // Check for DATABASE_URL in multiple possible locations
+    const dbUrl = process.env.DATABASE_URL || 
+                  process.env.PRISMA_DATABASE_URL ||
+                  process.env.NEXT_PUBLIC_DATABASE_URL
+    
+    if (!dbUrl) {
       return NextResponse.json(
-        { error: "DATABASE_URL not configured" },
+        { 
+          error: "DATABASE_URL not configured",
+          debug: {
+            hasDATABASE_URL: !!process.env.DATABASE_URL,
+            hasPRISMA_DATABASE_URL: !!process.env.PRISMA_DATABASE_URL,
+            hasNEXT_PUBLIC_DATABASE_URL: !!process.env.NEXT_PUBLIC_DATABASE_URL,
+            nodeEnv: process.env.NODE_ENV,
+            instructions: "Make sure DATABASE_URL is set in Vercel Environment Variables for Production environment"
+          }
+        },
         { status: 503 }
       )
     }
@@ -203,10 +217,30 @@ export async function POST(request: Request) {
 // GET endpoint to check status
 export async function GET() {
   try {
-    if (!process.env.DATABASE_URL || !prisma) {
+    // Check for DATABASE_URL in multiple possible locations
+    const dbUrl = process.env.DATABASE_URL || 
+                  process.env.PRISMA_DATABASE_URL ||
+                  process.env.NEXT_PUBLIC_DATABASE_URL
+    
+    if (!dbUrl) {
       return NextResponse.json({
         status: "not_configured",
-        message: "DATABASE_URL not configured"
+        message: "DATABASE_URL not configured",
+        debug: {
+          hasDATABASE_URL: !!process.env.DATABASE_URL,
+          hasPRISMA_DATABASE_URL: !!process.env.PRISMA_DATABASE_URL,
+          hasNEXT_PUBLIC_DATABASE_URL: !!process.env.NEXT_PUBLIC_DATABASE_URL,
+          nodeEnv: process.env.NODE_ENV,
+          allEnvKeys: Object.keys(process.env).filter(k => k.includes('DATABASE') || k.includes('PRISMA'))
+        }
+      }, { status: 503 })
+    }
+
+    if (!prisma) {
+      return NextResponse.json({
+        status: "prisma_not_initialized",
+        message: "Prisma client not initialized",
+        databaseUrlFound: !!dbUrl
       }, { status: 503 })
     }
 
