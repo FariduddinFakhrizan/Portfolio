@@ -5,6 +5,7 @@ import Navigation from "@/components/Navigation";
 import ScrollProgress from "@/components/ScrollProgress";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import BackToTop from "@/components/BackToTop";
+import EasterEggs from "@/components/EasterEggs";
 
 const inter = Inter({ 
   subsets: ["latin"], 
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
   keywords: ["Full-Stack Developer", "Cloud Engineer", "UI/UX Designer", "Laravel", "Next.js", "AWS", "Portfolio", "Software Engineer"],
   authors: [{ name: "Fariduddin Fakhrizan" }],
   creator: "Fariduddin Fakhrizan",
+  manifest: "/manifest.json",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -66,8 +68,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} bg-gray-500 text-white antialiased`}>
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <body className={`${inter.className} bg-gray-500 text-white antialiased transition-colors duration-300`} suppressHydrationWarning>
         <a 
           href="#main-content" 
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:font-mono focus:uppercase focus:tracking-widest focus:text-sm"
@@ -78,6 +80,7 @@ export default function RootLayout({
         <ScrollProgress />
         <Breadcrumbs />
         <BackToTop />
+        <EasterEggs />
         <div id="main-content">
           {children}
         </div>

@@ -4,6 +4,7 @@ import BackgroundEffects from "@/components/BackgroundEffects"
 import CursorFollower from "@/components/CursorFollower"
 import VisitorCounter from "@/components/VisitorCounter"
 import StatusSection from "@/components/StatusSection"
+import TypingTerminal from "@/components/TypingTerminal"
 import Link from "next/link"
 
 export default async function Home() {
@@ -18,10 +19,16 @@ export default async function Home() {
         {/* Introduction Section */}
         <section className="min-h-screen flex flex-col justify-end p-8 md:p-16 border-b border-white/10 relative z-10 pt-24">
           <span className="text-[10px] font-mono opacity-50 mb-4 tracking-widest reveal-up">000 - INTRODUCTION</span>
-          <h1 className="text-[15vw] md:text-[12vw] font-black uppercase tracking-tighter leading-[0.8] mb-12 gradient-text relative">
+          <h1 className="text-[15vw] md:text-[12vw] font-black uppercase tracking-tighter leading-[0.8] mb-8 gradient-text relative">
             <span className="absolute inset-0 blur-2xl opacity-30">Fariduddin Fakhrizan</span>
-            Fariduddin <br/> Fakhrizan
+            Fariduddin <br /> Fakhrizan
           </h1>
+
+          {/* Typing Terminal */}
+          <div className="max-w-lg mb-8 reveal-up">
+            <TypingTerminal />
+          </div>
+
           <p className="max-w-xl text-lg md:text-2xl opacity-70 tracking-tight mb-8 reveal-up">
             Full-Stack Developer & Cloud Engineer specializing in high-end UI/UX and scalable architecture.
           </p>
