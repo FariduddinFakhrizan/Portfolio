@@ -4,14 +4,5 @@
   "/api/resume-downloads/route": "app/api/resume-downloads/route.js",
   "/api/spotify/now-playing/route": "app/api/spotify/now-playing/route.js",
   "/api/visitors/route": "app/api/visitors/route.js",
-  "/blog/[slug]/page": "app/blog/[slug]/page.js",
-  "/blog/page": "app/blog/page.js",
-  "/case-studies/[project]/page": "app/case-studies/[project]/page.js",
-  "/case-studies/page": "app/case-studies/page.js",
-  "/contact/page": "app/contact/page.js",
-  "/now/page": "app/now/page.js",
-  "/page": "app/page.js",
-  "/projects/page": "app/projects/page.js",
-  "/technologies/page": "app/technologies/page.js",
-  "/testimonials/page": "app/testimonials/page.js"
+  "/page": "app/page.js"
 }

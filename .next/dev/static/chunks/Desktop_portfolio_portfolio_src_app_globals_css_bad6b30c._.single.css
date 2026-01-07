@@ -3240,18 +3240,6 @@
       line-height: var(--tw-leading, var(--text-base--line-height));
     }
   }
-
-  @media (prefers-color-scheme: dark) {
-    .dark\:bg-gray-500 {
-      background-color: var(--color-gray-500);
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .dark\:text-white {
-      color: var(--color-white);
-    }
-  }
 }
 
 html {

@@ -5,15 +5,20 @@ const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET
 const REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN
 
-const BASIC = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')
 const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token'
 const NOW_PLAYING_ENDPOINT = 'https://api.spotify.com/v1/me/player/currently-playing'
 
 async function getAccessToken() {
+    if (!CLIENT_ID || !CLIENT_SECRET) {
+        throw new Error('Spotify credentials missing')
+    }
+
+    const basic = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')
+
     const response = await fetch(TOKEN_ENDPOINT, {
         method: 'POST',
         headers: {
-            Authorization: `Basic ${BASIC}`,
+            Authorization: `Basic ${basic}`,
             'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: new URLSearchParams({

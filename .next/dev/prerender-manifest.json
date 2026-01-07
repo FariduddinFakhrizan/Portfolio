@@ -1,1 +1,11 @@
-{"version":4,"routes":{"/blog/building-reach-hub-with-laravel-12":{},"/blog/aws-cloud-practitioner-journey":{},"/blog/nextjs-16-features":{},"/blog/designing-healthcare-portals":{},"/case-studies/reach-journal-hub":{},"/case-studies/iiihws-healthcare":{},"/case-studies/klibs-portal":{}},"dynamicRoutes":{"/blog/[slug]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/blog/[slug]","routeRegex":"^\\/blog\\/([^/]+?)(?:\\/)?$","allowHeader":[]},"/case-studies/[project]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/case-studies/[project]","routeRegex":"^\\/case\\-studies\\/([^/]+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"81df871d8f133f43134af9267ef455ec","previewModeSigningKey":"31ccb3dacd00b7dd00d214e5d2f38a421b91e5bd7e8335c6b25150bf2afa4c71","previewModeEncryptionKey":"03c3919ca1888a5fd96878b02541b1333f54fdb656d299ec0faf8f8241b7b6c4"}}
+{
+  "version": 4,
+  "routes": {},
+  "dynamicRoutes": {},
+  "notFoundRoutes": [],
+  "preview": {
+    "previewModeId": "18faa8e94bccacb2846c0c5dc03d3a50",
+    "previewModeSigningKey": "006a22412aa8885170455af1ed3baa84d938ce81ca1292516e52b65d858ca511",
+    "previewModeEncryptionKey": "472724fefd3141cad2b45285785a8f4ea0631c50a796e3a8e3e640f116ec5793"
+  }
+}
