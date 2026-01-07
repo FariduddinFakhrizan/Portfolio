@@ -1,7 +1,7 @@
 import { prisma } from "@/lib/db"
 import { NextResponse } from "next/server"
 
-// Database migration endpoint - runs Prisma db push
+// Database migration endpoint - initializes database schema
 export async function POST(request: Request) {
   try {
     // Check authorization (optional - you can add API key check here)
@@ -35,28 +35,67 @@ export async function POST(request: Request) {
       )
     }
 
-    // Run Prisma db push to sync schema
-    const { execSync } = require('child_process')
-    
+    // Use Prisma Client to push schema directly
+    // Note: In production, you should use migrations instead
     try {
-      execSync('npx prisma db push --skip-generate', {
-        stdio: 'inherit',
-        env: {
-          ...process.env,
-          DATABASE_URL: process.env.DATABASE_URL,
-        }
-      })
+      // Test connection first
+      await prisma.$connect()
+      
+      // Create tables if they don't exist using raw SQL
+      await prisma.$executeRawUnsafe(`
+        CREATE TABLE IF NOT EXISTS "User" (
+          id SERIAL PRIMARY KEY,
+          email TEXT UNIQUE NOT NULL,
+          name TEXT,
+          "createdAt" TIMESTAMP DEFAULT NOW(),
+          "updatedAt" TIMESTAMP DEFAULT NOW()
+        )
+      `)
+      
+      await prisma.$executeRawUnsafe(`
+        CREATE TABLE IF NOT EXISTS "Project" (
+          id SERIAL PRIMARY KEY,
+          title TEXT NOT NULL,
+          description TEXT,
+          image TEXT,
+          link TEXT,
+          index INTEGER DEFAULT 0,
+          type TEXT DEFAULT 'DEVELOPMENT',
+          "createdAt" TIMESTAMP DEFAULT NOW(),
+          "updatedAt" TIMESTAMP DEFAULT NOW()
+        )
+      `)
+      
+      await prisma.$executeRawUnsafe(`
+        CREATE TABLE IF NOT EXISTS "Visitor" (
+          id SERIAL PRIMARY KEY,
+          "ipAddress" TEXT,
+          "userAgent" TEXT,
+          "visitedAt" TIMESTAMP DEFAULT NOW(),
+          "createdAt" TIMESTAMP DEFAULT NOW()
+        )
+      `)
+      
+      // Create enum type if it doesn't exist
+      await prisma.$executeRawUnsafe(`
+        DO $$ BEGIN
+          CREATE TYPE "ProjectType" AS ENUM ('DEVELOPMENT', 'DESIGN');
+        EXCEPTION
+          WHEN duplicate_object THEN null;
+        END $$;
+      `)
 
       return NextResponse.json({
         success: true,
-        message: "Database schema pushed successfully"
+        message: "Database schema initialized successfully",
+        tables: ["User", "Project", "Visitor"]
       })
-    } catch (pushError: any) {
-      console.error('Prisma db push error:', pushError)
+    } catch (schemaError: any) {
+      console.error('Schema creation error:', schemaError)
       return NextResponse.json(
         {
-          error: "Failed to push schema",
-          details: process.env.NODE_ENV === "development" ? pushError.message : undefined
+          error: "Failed to initialize schema",
+          details: process.env.NODE_ENV === "development" ? schemaError.message : undefined
         },
         { status: 500 }
       )
