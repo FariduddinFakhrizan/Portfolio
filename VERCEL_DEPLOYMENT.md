@@ -18,14 +18,16 @@ Your code has been successfully pushed to: `https://github.com/FariduddinFakhriz
 **CRITICAL**: You must add the following environment variable in Vercel:
 
 - **`DATABASE_URL`**: Your PostgreSQL database connection string
-  - Format: `postgresql://user:password@host:port/database?sslmode=require`
-  - For Vercel Postgres: Use the connection string provided by Vercel
-  - For external database: Use your production database URL
+  - **For Prisma Accelerate**: Use your Prisma Accelerate URL (format: `prisma+postgres://accelerate.prisma-data.net/...`)
+  - **For Direct PostgreSQL**: Format: `postgresql://user:password@host:port/database?sslmode=require`
+  - **For Vercel Postgres**: Use the connection string provided by Vercel
 
 **To add environment variables in Vercel:**
 1. Go to Project Settings → Environment Variables
 2. Add `DATABASE_URL` with your production database connection string
 3. Make sure to add it for **Production**, **Preview**, and **Development** environments
+
+**Note**: This project is configured to use Prisma Accelerate automatically when a `prisma+postgres://` URL is detected. Prisma Accelerate provides connection pooling, caching, and improved performance for serverless environments.
 
 ### 3. Database Setup
 
@@ -89,6 +91,9 @@ After deployment, check:
 - The project uses Next.js 16.1.1 with React 19
 - Tailwind CSS v4 is configured via PostCSS
 - Prisma Client is generated automatically during build
+- **Prisma Accelerate** is configured for optimal serverless performance
+  - Automatically enabled when `DATABASE_URL` starts with `prisma+postgres://`
+  - Provides connection pooling, caching, and improved query performance
 - The app gracefully handles missing DATABASE_URL in development
 
 ## 🔗 Useful Links
