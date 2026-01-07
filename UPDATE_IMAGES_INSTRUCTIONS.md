@@ -57,3 +57,4 @@ Project 3 (KLIBS Portal): image = /Hero.png
 
 If you see `image = NULL`, the database hasn't been updated yet.
 
+

@@ -456,7 +456,7 @@ export default function ContactPage() {
               © 2024 Fariduddin Fakhrizan. All Rights Reserved.
             </p>
             <div className="flex gap-6 text-[10px] font-mono uppercase tracking-widest opacity-30">
-              <span>Built with Next.js 15</span>
+              <span>Built with Next.js 16</span>
               <span>•</span>
               <span>Prisma</span>
               <span>•</span>

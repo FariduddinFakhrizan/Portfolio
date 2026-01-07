@@ -9,7 +9,7 @@ export default function VisitorCounter() {
   useEffect(() => {
     const trackAndFetchVisitor = async () => {
       try {
-        // Try to track visitor with CountAPI
+        // Track this visitor
         const trackResponse = await fetch("/api/visitors", {
           method: "POST",
           headers: {
@@ -20,79 +20,39 @@ export default function VisitorCounter() {
 
         if (trackResponse.ok) {
           const trackData = await trackResponse.json()
-          
-          // Always use the count from response, even if there's an error
           const apiCount = trackData.count || 0
-          
-          // If we got a valid count from API, use it and save to localStorage
-          if (apiCount > 0 || trackData.success) {
-            setCount(apiCount)
-            localStorage.setItem('visitor_count', apiCount.toString())
-            localStorage.setItem('visitor_count_timestamp', Date.now().toString())
+          setCount(apiCount)
+          console.log("Visitor tracked, count:", apiCount)
+        } else {
+          // If tracking fails, just get the count
+          const getResponse = await fetch("/api/visitors", {
+            cache: "no-store",
+          })
+          if (getResponse.ok) {
+            const getData = await getResponse.json()
+            setCount(getData.count || 0)
           } else {
-            // API failed, try to get from localStorage
-            const storedCount = localStorage.getItem('visitor_count')
-            const storedTimestamp = localStorage.getItem('visitor_count_timestamp')
-            
-            if (storedCount && storedTimestamp) {
-              const age = Date.now() - parseInt(storedTimestamp)
-              // Use stored count if it's less than 24 hours old
-              if (age < 24 * 60 * 60 * 1000) {
-                setCount(parseInt(storedCount))
-                console.log("Using cached visitor count:", storedCount)
-                return
-              }
-            }
-            
-            // No valid count anywhere, just show 0
             setCount(0)
           }
-        } else {
-          // HTTP error, try localStorage
-          await tryLocalStorageFallback()
         }
       } catch (error) {
         console.error("Error tracking visitor:", error)
-        // On any error, try localStorage
-        await tryLocalStorageFallback()
+        // Try to just get the count
+        try {
+          const getResponse = await fetch("/api/visitors", {
+            cache: "no-store",
+          })
+          if (getResponse.ok) {
+            const getData = await getResponse.json()
+            setCount(getData.count || 0)
+          } else {
+            setCount(0)
+          }
+        } catch {
+          setCount(0)
+        }
       } finally {
         setIsLoading(false)
-      }
-    }
-
-    const tryLocalStorageFallback = async () => {
-      const storedCount = localStorage.getItem('visitor_count')
-      const storedTimestamp = localStorage.getItem('visitor_count_timestamp')
-      
-      if (storedCount && storedTimestamp) {
-        const age = Date.now() - parseInt(storedTimestamp)
-        if (age < 24 * 60 * 60 * 1000) {
-          setCount(parseInt(storedCount))
-          console.log("Using cached visitor count from localStorage:", storedCount)
-          return
-        }
-      }
-      
-      // Try to fetch count without tracking
-      try {
-        const fetchResponse = await fetch("/api/visitors", {
-          cache: "no-store",
-        })
-        if (fetchResponse.ok) {
-          const fetchData = await fetchResponse.json()
-          const apiCount = fetchData.count || 0
-          setCount(apiCount)
-          if (apiCount > 0) {
-            localStorage.setItem('visitor_count', apiCount.toString())
-            localStorage.setItem('visitor_count_timestamp', Date.now().toString())
-          }
-        } else {
-          // Last resort: use stored count or 0
-          setCount(storedCount ? parseInt(storedCount) : 0)
-        }
-      } catch (fetchError) {
-        // Last resort: use stored count or 0
-        setCount(storedCount ? parseInt(storedCount) : 0)
       }
     }
 

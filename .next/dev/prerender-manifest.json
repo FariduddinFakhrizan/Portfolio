@@ -1,11 +1,1 @@
-{
-  "version": 4,
-  "routes": {},
-  "dynamicRoutes": {},
-  "notFoundRoutes": [],
-  "preview": {
-    "previewModeId": "a5a672aae174240a840ef799790ab6b4",
-    "previewModeSigningKey": "d1c8e858e444c96536d9a86510436b3fdc644eff6b274bc597544552dff4b66f",
-    "previewModeEncryptionKey": "51a81b3796a0429b09d094c1d3f974da94eafee683ce04566527c6237675df84"
-  }
-}
+{"version":4,"routes":{"/blog/building-reach-hub-with-laravel-12":{},"/blog/aws-cloud-practitioner-journey":{},"/blog/nextjs-16-features":{},"/blog/designing-healthcare-portals":{},"/case-studies/reach-journal-hub":{},"/case-studies/iiihws-healthcare":{},"/case-studies/klibs-portal":{}},"dynamicRoutes":{"/blog/[slug]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/blog/[slug]","routeRegex":"^\\/blog\\/([^/]+?)(?:\\/)?$","allowHeader":[]},"/case-studies/[project]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/case-studies/[project]","routeRegex":"^\\/case\\-studies\\/([^/]+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"81df871d8f133f43134af9267ef455ec","previewModeSigningKey":"31ccb3dacd00b7dd00d214e5d2f38a421b91e5bd7e8335c6b25150bf2afa4c71","previewModeEncryptionKey":"03c3919ca1888a5fd96878b02541b1333f54fdb656d299ec0faf8f8241b7b6c4"}}

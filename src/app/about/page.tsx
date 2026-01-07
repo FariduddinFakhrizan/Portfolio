@@ -3,6 +3,9 @@ import BackgroundEffects from "@/components/BackgroundEffects"
 import CursorFollower from "@/components/CursorFollower"
 import DragFollowText from "@/components/DragFollowText"
 import EducationCertCards from "@/components/EducationCertCards"
+import SkillsChart from "@/components/SkillsChart"
+import GitHubActivity from "@/components/GitHubActivity"
+import SpotifyWidget from "@/components/SpotifyWidget"
 import Image from "next/image"
 
 export default function AboutPage() {
@@ -149,6 +152,33 @@ export default function AboutPage() {
                 }
               ]}
             />
+          </div>
+        </section>
+
+        {/* Skills & GitHub Section */}
+        <section className="min-h-screen flex flex-col justify-center p-8 md:p-16 border-b border-white/10 relative z-10">
+          <div className="flex justify-between items-baseline mb-12 relative z-10">
+            <span className="text-[10px] font-mono opacity-50 tracking-widest">004 - SKILLS</span>
+            <DragFollowText as="h2" className="text-4xl font-black uppercase italic text-white" intensity={0.2}>
+              Skills & Activity
+            </DragFollowText>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
+            {/* Skills Chart */}
+            <div>
+              <h3 className="text-xl font-bold mb-6 text-white">Technical Proficiency</h3>
+              <SkillsChart />
+            </div>
+
+            {/* GitHub Activity */}
+            <div className="space-y-6">
+              <h3 className="text-xl font-bold mb-6 text-white">Open Source</h3>
+              <GitHubActivity username="FariduddinFakhrizan" />
+
+              {/* Spotify Widget */}
+              <h3 className="text-xl font-bold mt-8 mb-4 text-white">Now Playing</h3>
+              <SpotifyWidget />
+            </div>
           </div>
         </section>
 
