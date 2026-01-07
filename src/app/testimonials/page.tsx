@@ -8,14 +8,9 @@ export const metadata = {
     description: "What colleagues and managers say about working with Fariduddin Fakhrizan.",
 }
 
-// Ensure this page is included in the build
+// Ensure this page is included in the build as static
 export const dynamic = 'force-static'
 export const revalidate = false
-
-// Generate static params to ensure page is built
-export async function generateStaticParams() {
-  return []
-}
 
 const testimonials = [
     {

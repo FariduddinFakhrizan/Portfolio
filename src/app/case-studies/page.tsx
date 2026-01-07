@@ -10,14 +10,9 @@ export const metadata = {
     description: "In-depth breakdowns of Fariduddin Fakhrizan's key projects.",
 }
 
-// Ensure this page is included in the build
+// Ensure this page is included in the build as static
 export const dynamic = 'force-static'
 export const revalidate = false
-
-// Generate static params to ensure page is built
-export async function generateStaticParams() {
-  return []
-}
 
 const caseStudies = [
     {

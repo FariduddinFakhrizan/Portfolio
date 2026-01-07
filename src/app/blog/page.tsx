@@ -9,14 +9,9 @@ export const metadata = {
     description: "Technical articles, insights, and lessons learned by Fariduddin Fakhrizan.",
 }
 
-// Ensure this page is included in the build
+// Ensure this page is included in the build as static
 export const dynamic = 'force-static'
 export const revalidate = false
-
-// Generate static params to ensure page is built
-export async function generateStaticParams() {
-  return []
-}
 
 const articles = [
     {
