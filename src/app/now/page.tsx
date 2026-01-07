@@ -8,6 +8,10 @@ export const metadata = {
     description: "What Fariduddin Fakhrizan is currently working on, learning, and focusing on.",
 }
 
+// Ensure this page is included in the build
+export const dynamic = 'force-static'
+export const revalidate = false
+
 export default function NowPage() {
     return (
         <main className="relative bg-gray-500 overflow-hidden">

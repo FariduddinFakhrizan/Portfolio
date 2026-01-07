@@ -8,6 +8,10 @@ export const metadata = {
     description: "What colleagues and managers say about working with Fariduddin Fakhrizan.",
 }
 
+// Ensure this page is included in the build
+export const dynamic = 'force-static'
+export const revalidate = false
+
 const testimonials = [
     {
         quote: "Fariduddin's technical expertise and attention to detail made him invaluable to the REACH Hub project. His ability to translate complex requirements into elegant solutions is remarkable.",

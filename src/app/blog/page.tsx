@@ -9,6 +9,10 @@ export const metadata = {
     description: "Technical articles, insights, and lessons learned by Fariduddin Fakhrizan.",
 }
 
+// Ensure this page is included in the build
+export const dynamic = 'force-static'
+export const revalidate = false
+
 const articles = [
     {
         slug: "building-reach-hub-with-laravel-12",

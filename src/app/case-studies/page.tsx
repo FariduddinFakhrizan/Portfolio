@@ -10,6 +10,10 @@ export const metadata = {
     description: "In-depth breakdowns of Fariduddin Fakhrizan's key projects.",
 }
 
+// Ensure this page is included in the build
+export const dynamic = 'force-static'
+export const revalidate = false
+
 const caseStudies = [
     {
         slug: "reach-journal-hub",
