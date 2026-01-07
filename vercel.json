@@ -1,6 +1,8 @@
 {
-  "buildCommand": "prisma generate && next build",
-  "installCommand": "npm install",
-  "framework": "nextjs"
+  "buildCommand": "cd portfolio && prisma generate && next build",
+  "installCommand": "cd portfolio && npm install",
+  "outputDirectory": "portfolio/.next",
+  "framework": "nextjs",
+  "rootDirectory": "portfolio"
 }
 
