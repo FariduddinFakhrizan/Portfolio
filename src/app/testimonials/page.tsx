@@ -12,6 +12,11 @@ export const metadata = {
 export const dynamic = 'force-static'
 export const revalidate = false
 
+// Generate static params to ensure page is built
+export async function generateStaticParams() {
+  return []
+}
+
 const testimonials = [
     {
         quote: "Fariduddin's technical expertise and attention to detail made him invaluable to the REACH Hub project. His ability to translate complex requirements into elegant solutions is remarkable.",

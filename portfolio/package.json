@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "prisma generate && node scripts/verify-pages.js && next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
+    "verify-pages": "node scripts/verify-pages.js",
     "db:dev": "prisma dev",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",

@@ -12,6 +12,11 @@ export const metadata = {
 export const dynamic = 'force-static'
 export const revalidate = false
 
+// Generate static params to ensure page is built
+export async function generateStaticParams() {
+  return []
+}
+
 export default function NowPage() {
     return (
         <main className="relative bg-gray-500 overflow-hidden">
