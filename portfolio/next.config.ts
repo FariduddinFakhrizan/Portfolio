@@ -61,14 +61,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-
-  // Ensure all pages are included in build
-  output: 'standalone',
-  
-  // Generate static pages
-  generateBuildId: async () => {
-    return 'build-' + Date.now()
-  },
 };
 
 export default nextConfig;
