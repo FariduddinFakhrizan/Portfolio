@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { withAccelerate } from "@prisma/extension-accelerate";
 
 const globalForPrisma = globalThis as unknown as {
-  prisma: ReturnType<typeof createPrismaClient> | undefined;
+  prisma: PrismaClient | undefined;
 };
 
 // Prisma Client configuration
@@ -16,12 +16,16 @@ const prismaClientOptions: Prisma.PrismaClientOptions = {
 };
 
 // Create Prisma Client with Accelerate extension
-function createPrismaClient() {
+function createPrismaClient(): PrismaClient {
   const client = new PrismaClient(prismaClientOptions);
   
   // Use Accelerate extension if DATABASE_URL is a Prisma Accelerate URL
+  // The extension is applied at runtime, but we maintain PrismaClient type
+  // for TypeScript compatibility. Accelerate methods work transparently.
   if (process.env.DATABASE_URL?.startsWith('prisma+postgres://')) {
-    return client.$extends(withAccelerate());
+    // Cast to PrismaClient to maintain type compatibility
+    // Accelerate extension works at runtime regardless of TypeScript types
+    return client.$extends(withAccelerate()) as unknown as PrismaClient;
   }
   
   return client;
