@@ -1,7 +1,8 @@
 import { PrismaClient } from "@prisma/client";
+import { withAccelerate } from "@prisma/extension-accelerate";
 
 const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined;
+  prisma: ReturnType<typeof createPrismaClient> | undefined;
 };
 
 // Prisma Client configuration
@@ -14,10 +15,22 @@ const prismaClientOptions: Prisma.PrismaClientOptions = {
   errorFormat: "pretty",
 };
 
+// Create Prisma Client with Accelerate extension
+function createPrismaClient() {
+  const client = new PrismaClient(prismaClientOptions);
+  
+  // Use Accelerate extension if DATABASE_URL is a Prisma Accelerate URL
+  if (process.env.DATABASE_URL?.startsWith('prisma+postgres://')) {
+    return client.$extends(withAccelerate());
+  }
+  
+  return client;
+}
+
 // Use singleton pattern in all environments to prevent multiple instances
 if (!globalForPrisma.prisma) {
   try {
-    globalForPrisma.prisma = new PrismaClient(prismaClientOptions);
+    globalForPrisma.prisma = createPrismaClient();
   } catch (error) {
     console.error('Failed to initialize Prisma Client:', error);
     // In production, we want to continue even if Prisma fails to initialize
