@@ -23,9 +23,10 @@ export default function NowPage() {
                 <section className="relative min-h-screen flex flex-col items-center justify-center p-8">
                     <div className="max-w-4xl w-full space-y-12">
                         <DragFollowText 
-                            text="NOW"
                             className="text-8xl md:text-9xl font-black text-white/10 select-none"
-                        />
+                        >
+                            NOW
+                        </DragFollowText>
                         
                         <div className="space-y-8 text-white/90">
                             <div>
