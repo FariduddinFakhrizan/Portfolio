@@ -46,3 +46,40 @@ model Visitor {
   visitedAt DateTime @default(now())
   createdAt DateTime @default(now())
 }
+
+model GuestbookEntry {
+  id        Int                  @id @default(autoincrement())
+  name      String
+  message   String
+  email     String?
+  ipAddress String?
+  createdAt DateTime             @default(now())
+  reactions GuestbookReaction[]
+
+  @@index([createdAt])
+}
+
+model GuestbookReaction {
+  id        Int             @id @default(autoincrement())
+  emoji     String
+  entryId   Int
+  ipAddress String
+  createdAt DateTime        @default(now())
+  entry     GuestbookEntry  @relation(fields: [entryId], references: [id], onDelete: Cascade)
+
+  @@unique([entryId, ipAddress, emoji])
+  @@index([entryId])
+}
+
+model Playground {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  embedUrl    String
+  platform    String   // 'stackblitz' or 'codesandbox'
+  tags        String[] // Array of technology tags
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([createdAt])
+}

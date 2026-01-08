@@ -178,6 +178,42 @@ export default function Navigation() {
                 <span className="absolute inset-0 bg-white/10 rounded transform scale-0 group-hover:scale-100 transition-transform duration-300 origin-center" />
               </Link>
 
+              {/* Playground */}
+              <Link
+                href="/playground"
+                className={`relative px-4 py-2 text-xs font-mono uppercase tracking-widest text-white group ${isActive('/playground') ? 'opacity-100' : 'opacity-80'
+                  }`}
+              >
+                <span className="relative z-10 inline-block group-hover:scale-110 group-hover:opacity-100 transition-all duration-300">
+                  Playground
+                </span>
+                {isActive('/playground') && (
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-white" />
+                )}
+                {!isActive('/playground') && (
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                )}
+                <span className="absolute inset-0 bg-white/10 rounded transform scale-0 group-hover:scale-100 transition-transform duration-300 origin-center" />
+              </Link>
+
+              {/* Guestbook */}
+              <Link
+                href="/guestbook"
+                className={`relative px-4 py-2 text-xs font-mono uppercase tracking-widest text-white group ${isActive('/guestbook') ? 'opacity-100' : 'opacity-80'
+                  }`}
+              >
+                <span className="relative z-10 inline-block group-hover:scale-110 group-hover:opacity-100 transition-all duration-300">
+                  Guestbook
+                </span>
+                {isActive('/guestbook') && (
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-white" />
+                )}
+                {!isActive('/guestbook') && (
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                )}
+                <span className="absolute inset-0 bg-white/10 rounded transform scale-0 group-hover:scale-100 transition-transform duration-300 origin-center" />
+              </Link>
+
               {/* Contact */}
               <Link
                 href="/contact"
@@ -290,6 +326,26 @@ export default function Navigation() {
               }`}
           >
             Blog
+          </Link>
+
+          {/* Playground */}
+          <Link
+            href="/playground"
+            onClick={() => setIsOpen(false)}
+            className={`text-2xl font-mono uppercase tracking-widest text-white ${isActive('/playground') ? 'opacity-100' : 'opacity-80'
+              }`}
+          >
+            Playground
+          </Link>
+
+          {/* Guestbook */}
+          <Link
+            href="/guestbook"
+            onClick={() => setIsOpen(false)}
+            className={`text-2xl font-mono uppercase tracking-widest text-white ${isActive('/guestbook') ? 'opacity-100' : 'opacity-80'
+              }`}
+          >
+            Guestbook
           </Link>
 
           {/* Contact */}

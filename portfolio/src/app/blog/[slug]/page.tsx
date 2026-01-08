@@ -1,6 +1,7 @@
 import AnimatedSections from "@/components/AnimatedSections"
 import BackgroundEffects from "@/components/BackgroundEffects"
 import CursorFollower from "@/components/CursorFollower"
+import BlogComments from "@/components/BlogComments"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 
@@ -291,6 +292,11 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
                                     .replace(/1\. (.*)/g, '<li class="ml-4 mb-2 list-decimal">$1</li>')
                             }}
                         />
+                    </div>
+
+                    {/* Comments Section */}
+                    <div className="max-w-3xl">
+                        <BlogComments slug={slug} title={article.title} />
                     </div>
                 </article>
 
