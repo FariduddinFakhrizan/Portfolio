@@ -25,10 +25,10 @@ export default function BlogComments({ slug, title }: BlogCommentsProps) {
         // Configure Giscus
         // TODO: Update these values with your actual repository details
         script.setAttribute('data-repo', 'FariduddinFakhrizan/Portfolio')
-        script.setAttribute('data-repo-id', 'YOUR_REPO_ID') // Get this from giscus.app
-        script.setAttribute('data-category', 'Blog Comments')
-        script.setAttribute('data-category-id', 'YOUR_CATEGORY_ID') // Get this from giscus.app
-        script.setAttribute('data-mapping', 'specific')
+        script.setAttribute('data-repo-id', 'R_kgDOQ0s7Fw') // Get this from giscus.app
+        script.setAttribute('data-category', 'Announcements')
+        script.setAttribute('data-category-id', 'DIC_kwDOQ0s7F84C0tjC') // Get this from giscus.app
+        script.setAttribute('data-mapping', 'pathname')
         script.setAttribute('data-term', slug)
         script.setAttribute('data-strict', '0')
         script.setAttribute('data-reactions-enabled', '1')

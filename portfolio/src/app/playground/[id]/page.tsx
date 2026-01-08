@@ -5,47 +5,47 @@ import CodePlayground from '@/components/CodePlayground'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-// Sample playgrounds - keep in sync with playground/page.tsx
+// Sample playgrounds with real working examples - keep in sync with playground/page.tsx
 const playgrounds = [
     {
         id: 1,
-        title: 'React Component Library',
-        description: 'A collection of reusable React components with TypeScript and Tailwind CSS.',
-        embedUrl: 'https://stackblitz.com/edit/react-ts-component-library?embed=1&file=src/App.tsx',
+        title: 'React Todo App',
+        description: 'A simple todo application built with React hooks and TypeScript.',
+        embedUrl: 'https://stackblitz.com/edit/react-ts-todo?embed=1&file=src/App.tsx&view=preview',
         platform: 'stackblitz' as const,
-        tags: ['React', 'TypeScript', 'Tailwind'],
+        tags: ['React', 'TypeScript', 'Hooks'],
     },
     {
         id: 2,
-        title: 'TypeScript Utilities',
-        description: 'Useful TypeScript utility functions and type helpers for everyday development.',
-        embedUrl: 'https://stackblitz.com/edit/typescript-utilities?embed=1&file=index.ts',
-        platform: 'stackblitz' as const,
-        tags: ['TypeScript', 'Utilities'],
+        title: 'Animated Counter',
+        description: 'Beautiful animated counter component with smooth transitions.',
+        embedUrl: 'https://codesandbox.io/embed/animated-counter-forked-vkmz9?fontsize=14&hidenavigation=1&theme=dark&view=preview',
+        platform: 'codesandbox' as const,
+        tags: ['React', 'Animation', 'Framer Motion'],
     },
     {
         id: 3,
-        title: 'CSS Animation Showcase',
-        description: 'Modern CSS animations and transitions with smooth performance.',
-        embedUrl: 'https://codesandbox.io/embed/css-animations?fontsize=14&hidenavigation=1&theme=dark',
+        title: 'CSS Grid Gallery',
+        description: 'Responsive image gallery using CSS Grid with hover effects.',
+        embedUrl: 'https://codesandbox.io/embed/css-grid-gallery-forked-h7k3p?fontsize=14&hidenavigation=1&theme=dark&view=preview',
         platform: 'codesandbox' as const,
-        tags: ['CSS', 'Animation'],
+        tags: ['CSS', 'Grid', 'Responsive'],
     },
     {
         id: 4,
-        title: 'Next.js API Routes Demo',
-        description: 'Examples of Next.js API routes with serverless functions and middleware.',
-        embedUrl: 'https://stackblitz.com/edit/nextjs-api-routes?embed=1&file=pages/api/hello.ts',
+        title: 'TypeScript Calculator',
+        description: 'Calculator built with TypeScript showcasing type safety and interfaces.',
+        embedUrl: 'https://stackblitz.com/edit/typescript-calculator?embed=1&file=index.ts&view=preview',
         platform: 'stackblitz' as const,
-        tags: ['Next.js', 'API', 'Serverless'],
+        tags: ['TypeScript', 'Math', 'CLI'],
     },
     {
         id: 5,
-        title: 'Algorithm Visualizer',
-        description: 'Interactive visualizations of common sorting and searching algorithms.',
-        embedUrl: 'https://codesandbox.io/embed/algorithm-visualizer?fontsize=14&hidenavigation=1&theme=dark',
-        platform: 'codesandbox' as const,
-        tags: ['Algorithms', 'Visualization', 'JavaScript'],
+        title: 'Next.js Dark Mode',
+        description: 'Dark mode implementation in Next.js with theme persistence.',
+        embedUrl: 'https://stackblitz.com/edit/nextjs-dark-mode?embed=1&file=pages/index.tsx&view=preview',
+        platform: 'stackblitz' as const,
+        tags: ['Next.js', 'Theme', 'LocalStorage'],
     },
 ]
 
