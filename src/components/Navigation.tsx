@@ -113,7 +113,9 @@ export default function Navigation() {
                   <circle cx="12" cy="12" r="10" strokeWidth="2" />
                   <path strokeWidth="2" strokeLinecap="round" d="M12 6v6l4 2" />
                 </svg>
-                <span className="tabular-nums">{currentTime}</span>
+                <span className="tabular-nums" suppressHydrationWarning>
+                  {currentTime || '00:00:00'}
+                </span>
               </div>
 
               {/* Logo/Brand */}

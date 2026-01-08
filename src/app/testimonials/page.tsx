@@ -2,6 +2,7 @@ import AnimatedSections from "@/components/AnimatedSections"
 import BackgroundEffects from "@/components/BackgroundEffects"
 import CursorFollower from "@/components/CursorFollower"
 import DragFollowText from "@/components/DragFollowText"
+import AudioPlayer from "@/components/AudioPlayer"
 
 export const metadata = {
     title: "Testimonials",
@@ -86,7 +87,7 @@ export default function TestimonialsPage() {
                         ))}
                     </div>
 
-                    {/* Voice Notes Section - Placeholder */}
+                    {/* Voice Notes Section */}
                     <div className="mt-16 relative z-10">
                         <h2 className="text-2xl font-black uppercase tracking-tighter mb-6 gradient-text">
                             🎤 Voice Notes
@@ -94,11 +95,28 @@ export default function TestimonialsPage() {
                         <p className="text-base opacity-60 mb-6">
                             Hear directly from colleagues about their experience working with me.
                         </p>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div className="bg-[#0a0a0a] border border-white/10 p-6 rounded-lg text-center opacity-50">
-                                <span className="text-4xl mb-2 block">🎙️</span>
-                                <p className="text-sm font-mono">Voice notes coming soon...</p>
-                            </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {/* Voice Note 1 - Update audioSrc with your actual file path */}
+                            <AudioPlayer
+                                audioSrc="/voice-notes/testimonial-1.mp3"
+                                author="Project Manager"
+                                role="REACH Journal Hub"
+                                avatar="PM"
+                            />
+                            {/* Voice Note 2 - Update audioSrc with your actual file path */}
+                            <AudioPlayer
+                                audioSrc="/voice-notes/testimonial-2.mp3"
+                                author="Team Lead"
+                                role="IIIHWS Project"
+                                avatar="TL"
+                            />
+                            {/* Voice Note 3 - Update audioSrc with your actual file path */}
+                            <AudioPlayer
+                                audioSrc="/voice-notes/testimonial-3.mp3"
+                                author="Senior Developer"
+                                role="Olympia Education"
+                                avatar="SD"
+                            />
                         </div>
                     </div>
                 </section>
