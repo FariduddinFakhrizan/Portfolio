@@ -7,10 +7,10 @@ export async function POST(request: Request) {
     // Check authorization (optional - you can add API key check here)
     const authHeader = request.headers.get("authorization")
     const apiKey = request.headers.get("x-api-key")
-    
+
     // Allow if API key matches or in development
-    const isAuthorized = 
-      apiKey === process.env.API_KEY || 
+    const isAuthorized =
+      apiKey === process.env.API_KEY ||
       authHeader === `Bearer ${process.env.API_KEY}` ||
       process.env.NODE_ENV === "development"
 
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     try {
       // Test connection first
       await prisma.$connect()
-      
+
       // Create tables if they don't exist using raw SQL
       await prisma.$executeRawUnsafe(`
         CREATE TABLE IF NOT EXISTS "User" (
@@ -51,7 +51,7 @@ export async function POST(request: Request) {
           "updatedAt" TIMESTAMP DEFAULT NOW()
         )
       `)
-      
+
       await prisma.$executeRawUnsafe(`
         CREATE TABLE IF NOT EXISTS "Project" (
           id SERIAL PRIMARY KEY,
@@ -65,7 +65,7 @@ export async function POST(request: Request) {
           "updatedAt" TIMESTAMP DEFAULT NOW()
         )
       `)
-      
+
       await prisma.$executeRawUnsafe(`
         CREATE TABLE IF NOT EXISTS "Visitor" (
           id SERIAL PRIMARY KEY,
@@ -75,7 +75,64 @@ export async function POST(request: Request) {
           "createdAt" TIMESTAMP DEFAULT NOW()
         )
       `)
-      
+
+      // Guestbook tables
+      await prisma.$executeRawUnsafe(`
+        CREATE TABLE IF NOT EXISTS "GuestbookEntry" (
+          id SERIAL PRIMARY KEY,
+          name TEXT NOT NULL,
+          message TEXT NOT NULL,
+          email TEXT,
+          "ipAddress" TEXT,
+          "createdAt" TIMESTAMP DEFAULT NOW()
+        )
+      `)
+
+      await prisma.$executeRawUnsafe(`
+        CREATE INDEX IF NOT EXISTS "GuestbookEntry_createdAt_idx" 
+        ON "GuestbookEntry"("createdAt")
+      `)
+
+      await prisma.$executeRawUnsafe(`
+        CREATE TABLE IF NOT EXISTS "GuestbookReaction" (
+          id SERIAL PRIMARY KEY,
+          emoji TEXT NOT NULL,
+          "entryId" INTEGER NOT NULL,
+          "ipAddress" TEXT NOT NULL,
+          "createdAt" TIMESTAMP DEFAULT NOW(),
+          CONSTRAINT "GuestbookReaction_entryId_fkey" 
+            FOREIGN KEY ("entryId") 
+            REFERENCES "GuestbookEntry"(id) 
+            ON DELETE CASCADE,
+          CONSTRAINT "GuestbookReaction_entryId_ipAddress_emoji_key" 
+            UNIQUE ("entryId", "ipAddress", emoji)
+        )
+      `)
+
+      await prisma.$executeRawUnsafe(`
+        CREATE INDEX IF NOT EXISTS "GuestbookReaction_entryId_idx" 
+        ON "GuestbookReaction"("entryId")
+      `)
+
+      // Playground table
+      await prisma.$executeRawUnsafe(`
+        CREATE TABLE IF NOT EXISTS "Playground" (
+          id SERIAL PRIMARY KEY,
+          title TEXT NOT NULL,
+          description TEXT,
+          "embedUrl" TEXT NOT NULL,
+          platform TEXT NOT NULL,
+          tags TEXT[] DEFAULT '{}',
+          "createdAt" TIMESTAMP DEFAULT NOW(),
+          "updatedAt" TIMESTAMP DEFAULT NOW()
+        )
+      `)
+
+      await prisma.$executeRawUnsafe(`
+        CREATE INDEX IF NOT EXISTS "Playground_createdAt_idx" 
+        ON "Playground"("createdAt")
+      `)
+
       // Create enum type if it doesn't exist
       await prisma.$executeRawUnsafe(`
         DO $$ BEGIN
@@ -88,7 +145,7 @@ export async function POST(request: Request) {
       return NextResponse.json({
         success: true,
         message: "Database schema initialized successfully",
-        tables: ["User", "Project", "Visitor"]
+        tables: ["User", "Project", "Visitor", "GuestbookEntry", "GuestbookReaction", "Playground"]
       })
     } catch (schemaError: any) {
       console.error('Schema creation error:', schemaError)
@@ -103,7 +160,7 @@ export async function POST(request: Request) {
   } catch (error: unknown) {
     console.error("Migration error:", error)
     const errorMessage = error instanceof Error ? error.message : "Unknown error"
-    
+
     return NextResponse.json(
       {
         error: "Migration failed",
