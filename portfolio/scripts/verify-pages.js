@@ -12,10 +12,13 @@ const requiredPages = [
   'src/app/page.tsx',
   'src/app/about/page.tsx',
   'src/app/blog/page.tsx',
+  'src/app/blog/[slug]/page.tsx',
   'src/app/case-studies/page.tsx',
+  'src/app/case-studies/[project]/page.tsx',
   'src/app/now/page.tsx',
   'src/app/testimonials/page.tsx',
   'src/app/projects/page.tsx',
+  'src/app/projects/[id]/page.tsx',
   'src/app/contact/page.tsx',
   'src/app/technologies/page.tsx',
 ];
