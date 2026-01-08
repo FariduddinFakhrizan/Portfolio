@@ -5,9 +5,9 @@ import DragFollowText from "@/components/DragFollowText"
 import TechMarquee from "@/components/TechMarquee"
 
 export default function TechnologiesPage() {
-  const frontendTechs = ['Next.js 16', 'React 19', 'Tailwind 4.0', 'GSAP', 'TypeScript']
-  const backendTechs = ['Laravel 12', 'PHP 8.2', 'Java', 'PostgreSQL', 'Prisma']
-  const designCloudTechs = ['Figma', 'AWS', 'Archimate', 'UML']
+  const frontendTechs = ['Next.js 16', 'React 19', 'Tailwind 4.0', 'GSAP', 'TypeScript', 'HTML', 'CSS', 'JavaScript']
+  const backendTechs = ['Laravel 12', 'PHP 8.2', 'Java', 'PostgreSQL', 'Prisma', 'MySQL']
+  const designCloudTechs = ['Figma', 'AWS', 'Archimate', 'UML', 'Git', 'GitHub']
 
   return (
     <main className="relative bg-gray-500 overflow-hidden">

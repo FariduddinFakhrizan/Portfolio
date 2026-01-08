@@ -15,10 +15,10 @@ export const revalidate = false
 
 const testimonials = [
     {
-        quote: "Fariduddin's technical expertise and attention to detail made him invaluable to the REACH Hub project. His ability to translate complex requirements into elegant solutions is remarkable.",
-        author: "Project Manager",
-        role: "REACH Journal Hub",
-        avatar: "PM",
+        quote: "Working with Fariduddin was a great experience. As a developer, he consistently demonstrated strong technical skills, clear communication, and a proactive attitude toward problem-solving. He was reliable under pressure and always delivered tasks with a high level of quality. His ability to understand requirements quickly and execute them effectively made a real impact on the team’s success.",
+        author: "Mr Aiman",
+        role: "REACH Journal Hub/IIIHWS - Project Supervisor",
+        avatar: "PS",
     },
     {
         quote: "Working with Fariduddin was a pleasure. He consistently delivered high-quality work under tight deadlines and brought innovative ideas to improve our healthcare portal.",
