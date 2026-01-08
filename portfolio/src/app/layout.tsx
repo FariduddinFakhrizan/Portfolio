@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -84,6 +85,7 @@ export default function RootLayout({
         <div id="main-content">
           {children}
         </div>
+        <SpeedInsights />
       </body>
     </html>
   );
