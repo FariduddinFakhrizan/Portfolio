@@ -21,7 +21,7 @@ const caseStudies = [
         subtitle: "Academic Publishing Platform",
         description: "A globally recognized, open-access knowledge ecosystem for peer-reviewed journals and research collaboration.",
         image: "/Reach.png",
-        tech: ["Laravel 12", "Vue.js 3", "PostgreSQL", "Redis"],
+        tech: ["Laravel 12", "Vue.js 3", "MySQL", "Socket.io"],
         impact: ["10+ journals hosted", "Multi-language support", "Complex peer review workflow"],
     },
     {
@@ -30,7 +30,7 @@ const caseStudies = [
         subtitle: "Integrative Healthcare Platform",
         description: "World-class institutional portal bridging modern medical advances with traditional wellness practices.",
         image: "/IIIHWS.png",
-        tech: ["Next.js", "Tailwind CSS", "Figma", "Mobile-first"],
+        tech: ["Laravel 12", "Tailwind CSS", "Figma", "cPanel"],
         impact: ["WHO/UN SDG aligned", "Multi-division structure", "Accessibility compliant"],
     },
     {

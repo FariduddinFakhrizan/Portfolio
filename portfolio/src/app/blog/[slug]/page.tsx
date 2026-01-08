@@ -20,29 +20,30 @@ const articles: Record<string, {
         content: `
 ## The Challenge
 
-REACH Journal Hub needed to become a globally recognized, open-access knowledge ecosystem capable of hosting peer-reviewed journals, expert directories, and consultancy activities.
+REACH Journal Hub needed to become a globally recognized, open-access knowledge ecosystem capable of hosting peer-reviewed journals, expert directories, and consultancy activities. The primary difficulty lay in orchestrating a high-security manuscript workflow—managing the delicate transition from submission to double-blind peer review—while maintaining a seamless, accessible user experience for a non-technical academic audience.
 
 ## Technical Architecture
 
 ### Backend Stack
-- **Laravel 12** for the core application
-- **PostgreSQL** for robust relational data
-- **Redis** for caching and session management
+- **Laravel 12** Serves as the robust core application framework, utilizing PHP 8.2+ and modern MVC patterns for business logic.
+- **MySQL** Provides a resilient relational data structure for complex manuscript tracking and user role management.
+- **Inertia.js** Bridges the backend with the frontend, allowing for a Single Page Application (SPA) experience without the complexity of a separate API.
+- **Node.js & Socket.io** Powers the real-time chat and support engine, ensuring immediate responses to user inquiries without overloading the main application.
 
 ### Key Features Implemented
 
-1. **Multi-language Support**: Built a comprehensive i18n system supporting English, Malay, and Arabic.
+1. **Integrated Payment Gateway**: Seamless Billplz integration with X-Signature security for Open Access fee processing and article purchases.
 
-2. **Peer Review Workflow**: Designed a complex state machine for manuscript submissions, reviews, and revisions.
+2. **Peer Review Workflow**:Designed a complex state machine for manuscript management (Draft → Submitted → Under Review → Accepted/Rejected). The system includes automated PDF metadata extraction and secure double-blind reviewer assignment.
 
-3. **Expert Directory**: Created a searchable database of researchers with advanced filtering capabilities.
+3. **Expert Directory**: Created a searchable database of researchers and consultants with advanced filtering capabilities by expertise, institution, and country.
 
 ### Performance Optimizations
 
 We achieved sub-200ms response times through:
 - Aggressive query optimization
 - Strategic use of database indexes
-- Redis caching for frequently accessed data
+- Vite 7 Asset Pipeline ensuring ultra-fast frontend delivery
 
 ## Lessons Learned
 
