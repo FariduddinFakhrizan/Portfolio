@@ -99,16 +99,16 @@ export default function TestimonialsPage() {
                             {/* Voice Note 1 - Update audioSrc with your actual file path */}
                             <AudioPlayer
                                 audioSrc="/voice-notes/testimonial-1.mp3"
-                                author="Project Manager"
-                                role="REACH Journal Hub"
-                                avatar="PM"
+                                author="Dr Eqhwan"
+                                role="REACH Journal Hub - Advisor/Reviewer"
+                                avatar="EQ"
                             />
                             {/* Voice Note 2 - Update audioSrc with your actual file path */}
                             <AudioPlayer
                                 audioSrc="/voice-notes/testimonial-2.mp3"
-                                author="Team Lead"
-                                role="IIIHWS Project"
-                                avatar="TL"
+                                author="Dr Nursyafica"
+                                role="REACH Journal Hub - Advisor/Reviewer"
+                                avatar="NS"
                             />
                             {/* Voice Note 3 - Update audioSrc with your actual file path */}
                             <AudioPlayer
