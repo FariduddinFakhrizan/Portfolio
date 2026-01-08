@@ -23,6 +23,23 @@ export default function Navigation() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [downloadCount, setDownloadCount] = useState<number | null>(null)
+  const [currentTime, setCurrentTime] = useState<string>('')
+
+  // Update clock every second
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date()
+      setCurrentTime(now.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      }))
+    }
+    updateTime() // Set initial time
+    const interval = setInterval(updateTime, 1000)
+    return () => clearInterval(interval)
+  }, [])
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -84,12 +101,30 @@ export default function Navigation() {
       <nav className="fixed top-0 left-0 right-0 z-[100] glass backdrop-blur-md py-4 bg-black/50 border-b border-white/20 shadow-lg">
         <div className="max-w-7xl mx-auto px-8 md:px-16">
           <div className="flex items-center justify-between">
-            {/* Logo/Brand */}
-            <Link href="/" className="group">
-              <div className="w-10 h-10 border-2 border-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <span className="text-white text-xl font-black italic">F</span>
+            <div className="flex items-center gap-4">
+              {/* Clock */}
+              <div className="hidden md:flex items-center gap-2 text-white/80 font-mono text-sm">
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <circle cx="12" cy="12" r="10" strokeWidth="2" />
+                  <path strokeWidth="2" strokeLinecap="round" d="M12 6v6l4 2" />
+                </svg>
+                <span className="tabular-nums" suppressHydrationWarning>
+                  {currentTime || '00:00:00'}
+                </span>
               </div>
-            </Link>
+
+              {/* Logo/Brand */}
+              <Link href="/" className="group">
+                <div className="w-10 h-10 border-2 border-white flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-white text-xl font-black italic">F</span>
+                </div>
+              </Link>
+            </div>
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-1">
