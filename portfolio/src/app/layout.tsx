@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -8,8 +9,8 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import BackToTop from "@/components/BackToTop";
 import EasterEggs from "@/components/EasterEggs";
 
-const inter = Inter({ 
-  subsets: ["latin"], 
+const inter = Inter({
+  subsets: ["latin"],
   weight: ['400', '700', '900'],
 });
 
@@ -71,8 +72,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className={`${inter.className} bg-gray-500 text-white antialiased transition-colors duration-300`} suppressHydrationWarning>
-        <a 
-          href="#main-content" 
+        <a
+          href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:font-mono focus:uppercase focus:tracking-widest focus:text-sm"
         >
           Skip to main content
@@ -86,6 +87,7 @@ export default function RootLayout({
           {children}
         </div>
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
